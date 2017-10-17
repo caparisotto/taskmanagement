@@ -1,0 +1,32 @@
+{% extends 'certificados/base.html' %}
+
+{% block corpo %}
+
+<div class="well">
+
+ <h2> Certificados Digitais </h2>
+  <table class="table table-condensed" id="certtable">
+    <tbody>
+	{% for objeto in lista %}
+      <tr>
+             <th>  {{ objeto.nome }}  </th>
+             <th>  {{ objeto.aplicacao }}  </th>
+             <th>  {{ objeto.validade }}  </th>
+             <th>  {{ objeto.certificadora }}  </th>
+	     <th><a class="btn btn-info" href="/certificados/editcert/{{objeto.id}}">Editar</a></th>
+	     <th><a class="btn btn-info" href="/certificados/delcert/{{objeto.id}}">Remover</a></th>
+	     <th><a class="btn btn-info" href="/certificados/renewcert/{{objeto.id}}">Renovar</a></th>
+
+	{% endfor %}
+      </tr>
+    </tbody>
+      <tr>
+	<th><a class="btn btn-info" href="/certificados/addcert/">Adicionar</a></th>
+	<th></th>
+	<th></th>
+      </tr>
+  </table>
+
+</div>
+
+{% endblock %}

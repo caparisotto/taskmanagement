@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+
+  <div class="container">
+
+  <h2></h2>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Severidade</th>
+        <th>Prioridade</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for objeto in lista %}
+      <tr>
+	      <th> <a href='/editarisks/{{ objeto.id }}/'> {{ objeto.nome }}  </a></th>
+
+	      {% if objeto.severidade == "Rara" %}
+	             <th> <button type="button" class="btn btn-primary"> {{ objeto.severidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.severidade == "Baixa" %}
+	             <th> <button type="button" class="btn btn-success"> {{ objeto.severidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.severidade == "Média" %}
+	             <th> <button type="button" class="btn btn-info"> {{ objeto.severidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.severidade == "Alta" %}
+	             <th> <button type="button" class="btn btn-warning"> {{ objeto.severidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.severidade == "Crítica" %}
+	      	     <strong> <th> <button type="button" class="btn btn-danger"> {{ objeto.severidade }}</button></th> </strong>
+	      {% endif %}
+	     
+
+
+	      {% if objeto.probabilidade == "Rara" %}
+	             <th> <button type="button" class="btn btn-primary"> {{ objeto.probabilidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.probabilidade == "Baixa" %}
+	             <th> <button type="button" class="btn btn-success"> {{ objeto.probabilidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.probabilidade == "Média" %}
+	             <th> <button type="button" class="btn btn-info"> {{ objeto.probabilidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.probabilidade == "Alta" %}
+	             <th> <button type="button" class="btn btn-warning"> {{ objeto.probabilidade }}</button></th>
+	      {% endif %}
+	      {% if objeto.probabilidade == "Crítica" %}
+	      	     <strong> <th> <button type="button" class="btn btn-danger"> {{ objeto.probabilidade }}</button></th> </strong>
+	      {% endif %}
+
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+  {{ valor }}
+
+  <a href="/adicionarisks/{{ projeto }}" class="glyphicon glyphicon-plus" style="font-size:2.0em;"></a>
+
+  </div>  
+
+
+{% endblock %}
+

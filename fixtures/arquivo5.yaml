@@ -1,0 +1,40 @@
+- model: gerenciador.Riscos
+  fields:
+    nome: Espaço em Disco
+    projeto: 5
+    descricao: Encheu o disco durante um processo.
+    resolucao: Excluir arquivos temporarios e limpar logs.
+    severidade: Alta
+    probabilidade: Baixa  
+- model: gerenciador.Riscos
+  fields:
+    nome: Demora na Copia do Banco
+    projeto: 5
+    descricao: Transferencia do banco de dados demorou mais do que o esperado .
+    resolucao: Copiar primeiramente banco de produção. Após o start de todos processos principais, copiar a base de contingência.
+    severidade: Crítica
+    probabilidade: Rara
+- model: gerenciador.Riscos
+  fields:
+    nome: Exclusão Acidental de Arquivo
+    projeto: 5
+    descricao: Durante o processo, algum arquivo foi excluído indevidamente.
+    resolucao: Recuperar o backup.
+    severidade: Média
+    probabilidade: Alta 
+- model: gerenciador.Riscos
+  fields:
+    nome: Erro no Start dos Serviços
+    projeto: 5
+    descricao: Algum dos serviços não iniciou corretamente.
+    resolucao: Verificar problema nos logs e aplicar correção necessária.
+    severidade: Média
+    probabilidade: Baixa 
+- model: gerenciador.Riscos
+  fields:
+    nome: Problema Atrasa Finalização das Tarefas
+    projeto: 5
+    descricao: Algum problema ocasionou o atraso da execução das tarefas, finalizando o projeto mais tarde.
+    resolucao: Não assistir o último episódio de Game of Thrones.
+    severidade: Crítica
+    probabilidade: Crítica

@@ -1,0 +1,56 @@
+<html>
+<head>
+
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/jquery.dataTables.min.css' %}" />  
+<!--link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>   -->
+    <script src=" {% static 'js/jquery.js' %}"></script>
+    <script src=" {% static 'js/bootstrap.min.js' %}"></script>
+    <script src=" {% static 'js/jquery.dataTables.min.js' %}"></script>
+
+    <script src=" {% static 'js/jquery.min.js' %}"></script>
+    <script src=" {% static 'js/django-admin.multiselect.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'admin/css/django-admin-widgets.css' %}" />  
+    <link rel="stylesheet" href="{% static 'css/justified-nav.css' %}" />  
+
+    {% block cabecalho %}
+        <title>Gerenciamento de Projetos</title>
+    {% endblock %}
+<style>
+    body {padding-top: 10px;}
+  </style>
+</head>
+
+<body>
+
+      <!-- The justified navigation menu is meant for single line per list item.
+           Multiple lines will require custom code not provided by Bootstrap. -->
+        <nav>
+          <ul class="nav nav-justified">
+		  <li class="nav-item"><a class="nav-link" href="/"><h2>Home</h2></a></li>
+		  <li class="nav-item"><a class="nav-link" href="/listpessoas/"><h2>Pessoas</h2></a></li>
+		  <li class="nav-item"><a class="nav-link" href="/liststatus/"><h2>Tabela de Status</h2></a></li>
+	   <!--
+            <li class="nav-item"><a class="nav-link" href="/listtasks/">Tarefas</a></li>
+            <li class="nav-item"><a class="nav-link" href="/listgantt/">Gantt</a></li>
+            <li class="nav-item"><a class="nav-link" href="/listkanban/">Kanban</a></li>
+            <li class="nav-item"><a class="nav-link" href="/listrisk/">Riscos</a></li>
+      -->
+          </ul>
+        </nav>
+
+    {% block corpo %}
+        <!-- body -->
+    {% endblock %}
+
+        <nav>
+          <ul class="nav nav-justified">
+                  <li class="nav-item"><a class="nav-link" href="javascript:history.back()">Botão que faz o mesmo que o "Voltar" do navegador.</a></li>
+          </ul>
+        </nav>
+
+</body>
+
+</html>

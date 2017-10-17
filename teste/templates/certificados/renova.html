@@ -1,0 +1,16 @@
+{% extends 'certificados/base.html' %}
+
+    {% load bootstrap %}
+
+{% block corpo %}
+
+<div class="well">
+<form action="" method="post">
+	{% csrf_token %}
+        {{ form|bootstrap_horizontal }}
+	<input type="submit" class="btn btn-info" name="dataform" value="Atualizar"></input>
+	<input type="submit" class="btn btn-info" name="dataatual" value="Data Atual + 90"></input>
+</form>
+</div>
+
+{% endblock %}

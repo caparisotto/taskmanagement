@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+
+<div class="well">
+
+<h2>Escolha o Intervalo</h2>
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Dia Inicia</th>
+      <th>Mês Inicial</th>
+      <th>Ano Inicial</th>
+      <th>Dia Final</th>
+      <th>Mês Final</th>
+      <th>Ano Final</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+        <form action="/backups/ListJobs/" method="post">
+        {% csrf_token %}
+        <th>{{ form.cliente }}</a></th>
+        <th>{{ form.dia_from }}</a></th>
+        <th>{{ form.mes_from }}</a></th>
+        <th>{{ form.ano_from }}</a></th>
+        <th>{{ form.dia_to }}</a></th>
+        <th>{{ form.mes_to }}</a></th>
+        <th>{{ form.ano_to }}</a></th>
+        <th><button type="submit">CONSULTA</button></a></th>
+    </form>
+    </tr>
+    <tr>
+        <th>
+        <a style="font-size:2.0em;" class="glyphicon glyphicon-circle-arrow-left"  href="javascript:history.back()"></a></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+   </tbody>
+  </table>
+
+</div>
+
+{% endblock %}
+

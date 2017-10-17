@@ -1,0 +1,8 @@
+id,group,task,skill,effort,depends
+77,,Vencer Londrina,Chico,15,
+78,,Conquistar 3 pontos fora(Goias e Guarani),Zeppo,15,77
+79,,Fazer 4 pontos contra Nautico e Ceara,Gummo,21,77
+80,,Empatar CRB fora,Harpo,4,77:79
+81,,Vencer Oeste e Figueira,Chico,13,80
+82,,Pontuar contra America,Gummo,7,80:81
+83,,Vencer Santinha,Gummo,5,77:78:79:80:82

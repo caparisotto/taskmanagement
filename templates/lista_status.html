@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block corpo %}
+
+  <div class="container">
+
+  <h2></h2>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Nome</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for objeto in lista %}
+      <tr>
+	      <th> <a href='/editastatus/{{ objeto.id }}/'> {{ objeto.nome }}  </a></th>
+
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+  <a href="/adicionastatus/" class="glyphicon glyphicon-plus" style="font-size:2.0em;"></a>
+
+  </div>  
+
+
+{% endblock %}
+

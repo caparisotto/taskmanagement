@@ -1,0 +1,70 @@
+- model: gerenciador.Tarefa
+  fields:
+    nome: A
+    projeto: 7
+    duracao: 8
+- model: gerenciador.Tarefa
+  fields:
+    nome: B
+    projeto: 7
+    duracao: 2
+- model: gerenciador.Tarefa
+  fields:
+    nome: C
+    projeto: 7
+    duracao: 3
+- model: gerenciador.Tarefa
+  fields:
+    nome: D
+    projeto: 7
+    duracao: 5
+- model: gerenciador.Tarefa
+  fields:
+    nome: E
+    projeto: 7
+    duracao: 25
+- model: gerenciador.Tarefa
+  fields:
+    nome: F
+    projeto: 7
+    duracao: 1
+- model: gerenciador.Tarefa
+  fields:
+    nome: G
+    projeto: 7
+    duracao: 1
+- model: gerenciador.Tarefa
+  fields:
+    nome: H
+    projeto: 7
+    duracao: 8
+- model: gerenciador.Tarefa
+  fields:
+    nome: I
+    projeto: 7
+    duracao: 10
+- model: gerenciador.Tarefa
+  fields:
+    nome: J
+    projeto: 7
+    duracao: 13
+- model: gerenciador.Tarefa
+  fields:
+    nome: K
+    projeto: 7
+    duracao: 6
+- model: gerenciador.Tarefa
+  fields:
+    nome: L
+    projeto: 7
+    duracao: 2
+- model: gerenciador.Tarefa
+  fields:
+    nome: M
+    projeto: 7
+    duracao: 8
+- model: gerenciador.Tarefa
+  fields:
+    nome: N
+    projeto: 7
+    duracao: 14

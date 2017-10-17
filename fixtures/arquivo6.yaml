@@ -1,0 +1,32 @@
+- model: gerenciador.Tarefa
+  fields:
+    nome: Estudo
+    projeto: 5
+    pessoa: 12
+    status: 1
+    progresso: 100
+    duracao: 8
+- model: gerenciador.Tarefa
+  fields:
+    nome: Criação Programa
+    projeto: 5 
+    pessoa: 11
+    status: 2
+    progresso: 75
+    duracao: 20
+- model: gerenciador.Tarefa
+  fields:
+    nome: Ajuste Erros
+    projeto: 5 
+    pessoa: 13
+    status: 4
+    progresso: 20
+    duracao: 4
+- model: gerenciador.Tarefa
+  fields:
+    nome: Testes
+    projeto: 5 
+    pessoa: 14
+    status: 6
+    progresso: 0
+    duracao: 5

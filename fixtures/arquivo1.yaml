@@ -1,0 +1,26 @@
+- model: gerenciador.Pessoa
+  fields:
+    nome: Groucho
+- model: gerenciador.Pessoa
+  fields:
+    nome: Harpo
+- model: gerenciador.Pessoa
+  fields:
+    nome: Chico
+- model: gerenciador.Pessoa
+  fields:
+    nome: Gummo
+- model: gerenciador.Pessoa
+  fields:
+    nome: Zeppo
+
+
+
+- model: gerenciador.Projeto
+  fields:
+    nome: Desenvolvimento
+- model: gerenciador.Projeto
+  fields:
+    nome: Infra
+
+

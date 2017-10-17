@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+
+  <div class="container">
+
+  <h2></h2>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Pessoa</th>
+        <th>Projeto</th>
+        <th>Duração</th>
+        <th>Progresso</th>
+        <th>CS</th>
+        <th>ES</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for objeto in lista %}
+      <tr>
+	     <th> <a href='/editatasks/{{ objeto.id }}/'> {{ objeto.nome }}  </a></th>
+             <th>{{ objeto.pessoa }}</th>
+             <th>{{ objeto.projeto }}</th>
+             <th>{{ objeto.duracao }}</th>
+             <th>  <div class="progress">
+			     <div class="progress-bar" role="progressbar" aria-valuenow="{{ objeto.progresso }}"
+						 aria-valuemin="0" aria-valuemax="100" style="width:{{objeto.progresso}}%">
+			{{ objeto.progresso }}
+	  	</div>
+	</div>   </th>
+             <th>{{ objeto.cs }}</th>
+             <th>{{ objeto.es }}</th>
+
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+  <a href="/adicionatasks/{{ projeto }}" class="glyphicon glyphicon-plus" style="font-size:2.0em;"></a>
+
+  </div>  
+
+
+{% endblock %}
+

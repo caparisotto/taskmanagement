@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+
+<div class="well">
+
+<h> Informese.html' %}
+
+    {% load bootstrap %}
+
+{% block corpo %}
+
+<div class="well">
+<form action="" method="post">
+        {% csrf_token %}
+        {{ form|bootstrap_horizontal }}
+        <input type="submit" class="btn btn-info" value="Salvar" style="font-size:1.0em;"></input>
+        <a style="font-size:1.5em;" class="glyphicon glyphicon-circle-arrow-left"  href="javascript:history.back()"></a>
+</form>
+</div>
+
+{% endblock %}
+ a Data de Origem:  </h2>
+ <table class="table table-condensed" id="datatable">
+    <thead>
+      <tr>
+        <th>Dia</th>
+        <th>Mes</th>
+        <th>Ano</th>
+        <th></th>
+      </tr>
+    </thead>
+  <tbody>
+      <tr>
+        <th>  {{ dia }}  </th>
+        <th>  {{ mes }}  </th>
+        <th>  {{ ano }}  </th>
+      </tr>
+     </tbody>
+    </table> 
+
+
+
+
+</div>
+
+{% endblock %}

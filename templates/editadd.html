@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+  
+{% load bootstrap %}
+
+{% block corpo %}
+
+<div class="container">
+
+    {% if form %}
+    {{ form.media }}
+    {% endif %}
+
+<form action="" method="post">
+        {% csrf_token %}
+        {{ form|bootstrap_horizontal }}
+        <button type="submit" class="btn btn-info">Confirma</button>
+</form>
+
+</div>
+
+{% endblock %}

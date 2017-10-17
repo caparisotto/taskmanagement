@@ -1,0 +1,46 @@
+- model: gerenciador.Tarefa
+  fields:
+    nome: Estudo
+    projeto: 5
+    pessoa: 12
+- model: gerenciador.Tarefa
+  fields:
+    nome: Criação Programa
+    projeto: 5 
+    pessoa: 11
+- model: gerenciador.Tarefa
+  fields:
+    nome: Ajuste Erros
+    projeto: 5 
+    pessoa: 13
+- model: gerenciador.Tarefa
+  fields:
+    nome: Testes
+    projeto: 5 
+    pessoa: 14
+
+- model: gerenciador.Tarefa
+  fields:
+    nome: Levantamento de Informacoes
+    projeto: 6
+    pessoa: 11
+- model: gerenciador.Tarefa
+  fields:
+    nome: Analise das Necessidades
+    projeto: 6
+    pessoa: 14
+- model: gerenciador.Tarefa
+  fields:
+    nome: Execucao das Tarefas
+    projeto: 6
+    pessoa: 15
+- model: gerenciador.Tarefa
+  fields:
+    nome: Checagem das Melhorias
+    projeto: 6
+    pessoa: 11
+- model: gerenciador.Tarefa
+  fields:
+    nome: Apresentação
+    projeto: 6
+    pessoa: 12

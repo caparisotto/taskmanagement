@@ -1,0 +1,28 @@
+{% extends 'certificados/base.html' %}
+
+{% block corpo %}
+
+<div class="well">
+
+ <h2> Entidades Certificadoras </h2>
+  <table class="table table-condensed" id="certtable">
+    <tbody>
+	{% for objeto in lista %}
+      <tr>
+             <th>  {{ objeto.nome }}  </th>
+	     <th><a class="btn btn-info" href="/certificados/editentity/{{objeto.id}}">Editar</a></th>
+	     <th><a class="btn btn-info" href="/certificados/delentity/{{objeto.id}}">Remover</a></th>
+
+	{% endfor %}
+      </tr>
+    </tbody>
+      <tr>
+	<th><a class="btn btn-info" href="/certificados/addentity/">Adicionar</a></th>
+	<th></th>
+	<th></th>
+      </tr>
+  </table>
+
+</div>
+
+{% endblock %}

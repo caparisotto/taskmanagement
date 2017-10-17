@@ -1,0 +1,18 @@
+- model: gerenciador.Status
+  fields:
+    nome: Em Análise
+- model: gerenciador.Status
+  fields:
+    nome: Pronto
+- model: gerenciador.Status
+  fields:
+    nome: Em Execução
+- model: gerenciador.Status
+  fields:
+    nome: Testes
+- model: gerenciador.Status
+  fields:
+    nome: Correção
+- model: gerenciador.Status
+  fields:
+    nome: Finalizado
