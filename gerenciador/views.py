@@ -6,6 +6,7 @@ from models import *
 from forms import *
 from django.http import HttpResponseRedirect
 import os
+from datetime import *
 
 # Create your views here.
 
@@ -62,6 +63,10 @@ def adicionapessoa(request):
 #tarefas
 def lista_tarefas(request,id):
 	lista = Tarefa.objects.filter(projeto=id).order_by('-progresso')
+        return render(request, 'lista_tarefas.html', {'lista': lista, 'projeto': id})
+'''
+#calculo da media, quando houver subtarefas
+#ainda estava com bastante problema a funcao de subtarefas
         for elemento in lista:
             elemento.cs = 0
             elemento.es = 0
@@ -83,7 +88,7 @@ def lista_tarefas(request,id):
                 elemento.pessoa = None
             if elemento.subtarefade != None:
                 elemento.es = 1
-        return render(request, 'lista_tarefas.html', {'lista': lista, 'projeto': id})
+'''
 
 def editatarefa(request, id):
         tarefa = get_object_or_404(Tarefa, id=id)
@@ -91,8 +96,12 @@ def editatarefa(request, id):
         projeto = get_object_or_404(Projeto, id=codproj)
         form = FormTarefa(projeto,request.POST or None, instance=tarefa)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/listtasks/%s'%(codproj))
+            status, erro = valida_tarefa(form)
+            if status == 1:
+                return render(request, 'editadd.html', {'form': form, 'erro': erro})
+            else:
+                form.save()
+                return HttpResponseRedirect('/listtasks/%s'%(codproj))
         else:
                 form = FormTarefa(projeto,instance=tarefa)
         return render(request, 'editadd.html', {'form': form})
@@ -102,8 +111,12 @@ def adicionatarefa(request,id):
         if request.method ==  "POST":
                 form = FormTarefa(projeto, request.POST, request.FILES)
                 if form.is_valid():
-                    form.save()
-                    return HttpResponseRedirect('/listtasks/%s'%(id))
+                    status, erro = valida_tarefa(form)
+                    if status == 1:
+                        return render(request, 'editadd.html', {'form': form, 'erro': erro})
+                    else:
+                        form.save()
+                        return HttpResponseRedirect('/listtasks/%s'%(id))
         else:
                 form = FormTarefa(projeto)
         return render(request, 'editadd.html', {'form': form})
@@ -162,30 +175,54 @@ def adicionastatus(request):
                 form = FormStatus()
         return render(request, 'editadd.html', {'form': form})
 
-def lista_kanban(request,id):
-	lista = Tarefa.objects.filter(projeto=id).filter(subtarefade=None).filter(solucao=None).order_by('nome')
+#Geracao relatorios
+def lista_kanban_ws(request,id):
+	lista = Tarefa.objects.filter(projeto=id).order_by('nome')
 	status = Status.objects.all().order_by('ordem')
-        for elemento in lista:
-            subt = Tarefa.objects.filter(subtarefade=elemento)
-            for valor in subt:
-                elemento.nome = "%s - S:%s" %(elemento.nome,valor.nome)
+        #for elemento in lista:
+            #subt = Tarefa.objects.filter(subtarefade=elemento)
+            #for valor in subt:
+            #    elemento.nome = "%s - S:%s" %(elemento.nome,valor.nome)
         return render(request, 'lista_kanban.html', {'lista_tarefas': lista, 'lista_status': status})
 
-def lista_plano_ws(request,id):
+def lista_kanban(request,id):
+	lista = Tarefa.objects.filter(projeto=id).filter(solucao=None).order_by('nome')
+	status = Status.objects.all().order_by('ordem')
+        #for elemento in lista:
+            #subt = Tarefa.objects.filter(subtarefade=elemento)
+            #for valor in subt:
+                #elemento.nome = "%s - S:%s" %(elemento.nome,valor.nome)
+        return render(request, 'lista_kanban.html', {'lista_tarefas': lista, 'lista_status': status})
+
+def lista_gantt_ws(request,id):
 	lista = Tarefa.objects.filter(projeto=id).order_by('id')
         proj = Projeto.objects.filter(id=id)
         listapessoas = Pessoa.objects.filter(projeto=proj)
-        gera_plano(lista,proj,listapessoas)
+        gera_plano(lista,proj,listapessoas,2)
+        return render(request, 'gantt.html', {'lista': lista, 'proj': proj})
+
+def lista_gantt(request,id):
+	lista = Tarefa.objects.filter(projeto=id).filter(solucao=None).order_by('id')
+        proj = Projeto.objects.filter(id=id)
+        listapessoas = Pessoa.objects.filter(projeto=proj)
+        gera_plano(lista,proj,listapessoas,2)
+        return render(request, 'gantt.html', {'lista': lista, 'proj': proj})
+
+def lista_plano_ws(request,id):
+	lista = Tarefa.objects.filter(projeto=id).order_by('solucao','id')
+        proj = Projeto.objects.filter(id=id)
+        listapessoas = Pessoa.objects.filter(projeto=proj)
+        gera_plano(lista,proj,listapessoas,1)
         return render(request, 'plan.html', {'lista': lista, 'proj': proj})
 
 def lista_plano(request,id):
 	lista = Tarefa.objects.filter(projeto=id).filter(solucao=None).order_by('id')
         proj = Projeto.objects.filter(id=id)
         listapessoas = Pessoa.objects.filter(projeto=proj)
-        gera_plano(lista,proj,listapessoas)
+        gera_plano(lista,proj,listapessoas,1)
         return render(request, 'plan.html', {'lista': lista, 'proj': proj})
 
-def gera_plano(lista,proj,listapessoas):
+def gera_plano(lista,proj,listapessoas,tipo):
         with open('templates/done.csv', 'wb+') as destination:
             destination.write('')
 
@@ -195,7 +232,7 @@ def gera_plano(lista,proj,listapessoas):
                 antecessoras = ""
                 for i in tarefa.antecessor.all():
                     antecessoras = antecessoras + ":" + str(i.id)
-                destination.write('%d,,%s,%s,%d,%s\n' %(tarefa.id,tarefa.nome,tarefa.pessoa.nome,tarefa.duracao,str(antecessoras[1:])) )
+                destination.write('%d,,%s,%s,%d,%s\n' %(tarefa.id,tarefa.nome,tarefa.pessoa.nome,tarefa.duracao,str(antecessoras[1:])))
 
         with open('templates/people.csv', 'wb+') as destination:
             ultimac = 0
@@ -204,10 +241,30 @@ def gera_plano(lista,proj,listapessoas):
                 ultimac, cordesenho = get_color(ultimac)
                 destination.write('%s,,%s\n' %(pessoa.nome,cordesenho) )
 
-        os.system("cd templates && pytaskplan -p")
+        dataini = proj[0].datainicio.strftime("%y/%m/%d")
+
+        if tipo == 1:
+            os.system("cd templates && pytaskplan -p -s %s" %str(dataini) )
+        elif tipo == 2:
+            os.system("cd templates && pytaskplan -g -s %s" %str(dataini) )
+
 
         return
 
+def valida_tarefa(form):
+    status = 0
+    erro = "Retorno OK"
+
+    antecessor = form.cleaned_data['antecessor']
+    solucao = form.cleaned_data['solucao']
+
+    if solucao:
+        for tarefa in antecessor:
+            if tarefa.solucao:
+                status = 1
+                erro = "Tarefa antecessora não pode ser solução para um risco"
+
+    return status, erro
 
 def get_color(last):
     cor = []

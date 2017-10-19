@@ -1,10 +1,6 @@
 id,group,task,skill,effort,depends
-77,,Vencer Londrina,Chico,5,
-78,,Conquistar 3 pontos fora(Goias e Guarani),Zeppo,3,77
-79,,Fazer 4 pontos contra Nautico e Ceara,Gummo,6,77
-80,,Empatar CRB fora,Harpo,4,77:79
-81,,Vencer Oeste e Figueira,Chico,10,80
-82,,Pontuar contra America,Gummo,1,80:81
-83,,Vencer Santinha,Gummo,2,77:78:79:80
-84,,Derrotar Goias,Chico,5,
-85,,Derrotar Guarani,Harpo,3,
+15,,tarefa1,Diane Nguyen,4,26
+17,,tarefa2,Diane Nguyen,3,15
+20,,tarefa11,Todd Chavez,7,15
+21,,tarefa13,Todd Chavez,4,26
+26,,ultima a ser criada,Diane Nguyen,4,

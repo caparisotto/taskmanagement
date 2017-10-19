@@ -14,8 +14,11 @@
         <th>Tarefa</th>
         <th>Riscos</th>
         <th>Kanban</th>
+        <th>Kanban(c/ riscos)</th>
         <th>Plano</th>
         <th>Plano(c/ riscos)</th>
+        <th>Gantt</th>
+        <th>Gantt(c/ riscos)</th>
       </tr>
     </thead>
     <tbody>
@@ -24,9 +27,12 @@
 	      <th> <a href='/editaprojeto/{{ objeto.id }}/'> {{ objeto.nome }}  </a></th>
 	      <th> <a class="glyphicon glyphicon-tasks" href='/listtasks/{{ objeto.id }}/'></a></th>
 	      <th> <a class="glyphicon glyphicon-fire" href='/listrisks/{{ objeto.id }}/'></a></th>
-	      <th> <a target="_blank" class="glyphicon glyphicon-paperclip" href='/listkanban/{{ objeto.id }}/'></a></th>
+	      <th> <a target="_blank" class="glyphicon glyphicon-calendar" href='/listkanban/{{ objeto.id }}/'></a></th>
+	      <th> <a target="_blank" class="glyphicon glyphicon-bell" href='/listkanbanws/{{ objeto.id }}/'></a></th>
 	      <th> <a target="_blank" class="glyphicon glyphicon-calendar" href='/listplan/{{ objeto.id }}/'></a></th>
 	      <th> <a target="_blank" class="glyphicon glyphicon-bell" href='/listplanws/{{ objeto.id }}/'></a></th>
+	      <th> <a target="_blank" class="glyphicon glyphicon-calendar" href='/listgantt/{{ objeto.id }}/'></a></th>
+	      <th> <a target="_blank" class="glyphicon glyphicon-bell" href='/listganttws/{{ objeto.id }}/'></a></th>
 
         {% endfor %}
       </tr>

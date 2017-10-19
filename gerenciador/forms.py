@@ -33,12 +33,12 @@ class FormRisco(forms.ModelForm):
 class FormTarefa(forms.ModelForm):
         class Meta:
                 model = Tarefa
-                fields = ['nome', 'projeto', 'pessoa', 'status', 'progresso', 'duracao', 'antecessor', 'subtarefade', 'solucao', ]
+                fields = ['nome', 'projeto', 'pessoa', 'status', 'progresso', 'duracao', 'antecessor', 'solucao', ]
                 widgets = {'projeto': forms.HiddenInput()}
         def __init__(self, projeto, *args, **kwargs):
                 super(FormTarefa, self).__init__(*args, **kwargs)
-                self.fields['antecessor'] = forms.ModelMultipleChoiceField(queryset=Tarefa.objects.filter(projeto=projeto).filter(solucao=None).order_by('nome'), required=False, widget=FilteredSelectMultiple("Tarefa", is_stacked=False))
-                self.fields['subtarefade'] = forms.ModelChoiceField(queryset=Tarefa.objects.filter(projeto=projeto).order_by('nome'), required=False)
+                self.fields['antecessor'] = forms.ModelMultipleChoiceField(queryset=Tarefa.objects.filter(projeto=projeto).order_by('nome'), required=False)
+#                self.fields['subtarefade'] = forms.ModelChoiceField(queryset=Tarefa.objects.filter(projeto=projeto).order_by('nome'), required=False)
                 self.fields['pessoa'] = forms.ModelChoiceField(queryset=Pessoa.objects.filter(projeto=projeto).order_by('nome'))
                 self.fields['solucao'] = forms.ModelChoiceField(queryset=Riscos.objects.filter(projeto=projeto).order_by('nome'), required=False)
                 self.fields['projeto'].initial = projeto

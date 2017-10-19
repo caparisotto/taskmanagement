@@ -41,8 +41,11 @@ urlpatterns = [
     url(r'adicionarisks/(?P<id>\d+)/$', adicionarisco),
 
     url(r'listkanban/(?P<id>\d+)/$', lista_kanban),
+    url(r'listkanbanws/(?P<id>\d+)/$', lista_kanban_ws),
     url(r'listplan/(?P<id>\d+)/$', lista_plano),
     url(r'listplanws/(?P<id>\d+)/$', lista_plano_ws),
+    url(r'listgantt/(?P<id>\d+)/$', lista_gantt),
+    url(r'listganttws/(?P<id>\d+)/$', lista_gantt_ws),
 ]
 
 
