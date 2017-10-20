@@ -96,7 +96,7 @@ def editatarefa(request, id):
         projeto = get_object_or_404(Projeto, id=codproj)
         form = FormTarefa(projeto,request.POST or None, instance=tarefa)
         if form.is_valid():
-            status, erro = valida_tarefa(form)
+            status, erro = valida_tarefa(form,tarefa)
             if status == 1:
                 return render(request, 'editadd.html', {'form': form, 'erro': erro})
             else:
@@ -111,7 +111,7 @@ def adicionatarefa(request,id):
         if request.method ==  "POST":
                 form = FormTarefa(projeto, request.POST, request.FILES)
                 if form.is_valid():
-                    status, erro = valida_tarefa(form)
+                    status, erro = valida_tarefa(form,None)
                     if status == 1:
                         return render(request, 'editadd.html', {'form': form, 'erro': erro})
                     else:
@@ -198,31 +198,31 @@ def lista_gantt_ws(request,id):
 	lista = Tarefa.objects.filter(projeto=id).order_by('id')
         proj = Projeto.objects.filter(id=id)
         listapessoas = Pessoa.objects.filter(projeto=proj)
-        gera_plano(lista,proj,listapessoas,2)
+        gera_plano(lista,proj,listapessoas,2,1)
         return render(request, 'gantt.html', {'lista': lista, 'proj': proj})
 
 def lista_gantt(request,id):
 	lista = Tarefa.objects.filter(projeto=id).filter(solucao=None).order_by('id')
         proj = Projeto.objects.filter(id=id)
         listapessoas = Pessoa.objects.filter(projeto=proj)
-        gera_plano(lista,proj,listapessoas,2)
+        gera_plano(lista,proj,listapessoas,2,0)
         return render(request, 'gantt.html', {'lista': lista, 'proj': proj})
 
 def lista_plano_ws(request,id):
 	lista = Tarefa.objects.filter(projeto=id).order_by('solucao','id')
         proj = Projeto.objects.filter(id=id)
         listapessoas = Pessoa.objects.filter(projeto=proj)
-        gera_plano(lista,proj,listapessoas,1)
+        gera_plano(lista,proj,listapessoas,1,1)
         return render(request, 'plan.html', {'lista': lista, 'proj': proj})
 
 def lista_plano(request,id):
 	lista = Tarefa.objects.filter(projeto=id).filter(solucao=None).order_by('id')
         proj = Projeto.objects.filter(id=id)
         listapessoas = Pessoa.objects.filter(projeto=proj)
-        gera_plano(lista,proj,listapessoas,1)
+        gera_plano(lista,proj,listapessoas,1,0)
         return render(request, 'plan.html', {'lista': lista, 'proj': proj})
 
-def gera_plano(lista,proj,listapessoas,tipo):
+def gera_plano(lista,proj,listapessoas,tipo,comrisco):
         with open('templates/done.csv', 'wb+') as destination:
             destination.write('')
 
@@ -231,7 +231,15 @@ def gera_plano(lista,proj,listapessoas,tipo):
             for tarefa in lista:
                 antecessoras = ""
                 for i in tarefa.antecessor.all():
-                    antecessoras = antecessoras + ":" + str(i.id)
+                    if comrisco == 1:
+                        antecessoras = antecessoras + ":" + str(i.id)
+                    else:
+                        if i.solucao:
+                            for j in i.antecessor.all():
+                                antecessoras = antecessoras + ":" + str(j.id)
+                        else:
+                            antecessoras = antecessoras + ":" + str(i.id)
+                            
                 destination.write('%d,,%s,%s,%d,%s\n' %(tarefa.id,tarefa.nome,tarefa.pessoa.nome,tarefa.duracao,str(antecessoras[1:])))
 
         with open('templates/people.csv', 'wb+') as destination:
@@ -251,7 +259,7 @@ def gera_plano(lista,proj,listapessoas,tipo):
 
         return
 
-def valida_tarefa(form):
+def valida_tarefa(form,edtarefa):
     status = 0
     erro = "Retorno OK"
 
@@ -264,14 +272,26 @@ def valida_tarefa(form):
                 status = 1
                 erro = "Tarefa antecessora não pode ser solução para um risco"
 
+    if edtarefa: #se for edicao
+        for tarefa in antecessor:
+            if tarefa.id == edtarefa.id:
+                status = 1
+                erro = "Tarefa antecessora não pode ser ela mesma"
+            for antdoant in tarefa.antecessor.all():
+                if antdoant.id == edtarefa.id:
+                    status = 1
+                    erro = "Assim tu vai criar um loop, seu maluco"
+
     return status, erro
 
 def get_color(last):
     cor = []
     cor.append('empty')
     cor.append('blue')
-    cor.append('yellow')
     cor.append('red')
     cor.append('green')
+    cor.append('black')
+    cor.append('orange')
+    cor.append('purple')
 
     return last+1,cor[last+1]

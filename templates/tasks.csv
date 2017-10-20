@@ -1,6 +1,14 @@
 id,group,task,skill,effort,depends
-15,,tarefa1,Diane Nguyen,4,26
-17,,tarefa2,Diane Nguyen,3,15
-20,,tarefa11,Todd Chavez,7,15
-21,,tarefa13,Todd Chavez,4,26
-26,,ultima a ser criada,Diane Nguyen,4,
+17,,Levar Cabelo da Hollyhock para DNA,Todd Chavez,1,16
+23,,Tirar Fotos com Courtney Portier,Todd Chavez,1,22
+18,,Limpar a Casa,Todd Chavez,1,16
+13,,Buscar Oculos do Sr Peanutbutter,Todd Chavez,1,
+14,,Levar Cabelo do Bojack para DNA,Todd Chavez,1,13
+15,,Ter um Encontro com Courtney Portier,Todd Chavez,1,14
+16,,Levar Outro Cabelo para DNA,Todd Chavez,1,14:15
+19,,Atuar Como Modelo,Todd Chavez,1,18
+20,,Impedir Diane de Ver as Noticias sobre a Peticao,Todd Chavez,1,19
+21,,Pegar Resultado do Exame de DNA,Diane Nguyen,1,19
+22,,Ir na casa do Channing Tatum,Todd Chavez,1,20:21
+24,,Ir a Reuniao de Assexuais,Todd Chavez,1,23
+25,,Tocar Triangulo na Opera,Todd Chavez,1,23
